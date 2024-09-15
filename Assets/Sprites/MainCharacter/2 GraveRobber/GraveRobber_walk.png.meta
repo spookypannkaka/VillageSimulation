@@ -124,8 +124,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 16e20b3061021e948ab0fb4c872f714d
-      internalID: -1602653485
+      spriteID: 1a9fc8e7cce9cf2408d15d245e931f90
+      internalID: 1736460140
       vertices: []
       indices: 
       edges: []
@@ -145,8 +145,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 525eea577bd3bd241be3383c45fdb62b
-      internalID: 744774519
+      spriteID: 441ce9dcf1841cc4e8c405e6b48a6bad
+      internalID: 1554094374
       vertices: []
       indices: 
       edges: []
@@ -166,8 +166,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 2489758a92c9eba45bff2ff651e50b0b
-      internalID: -911234193
+      spriteID: c396bc0b7c9c92a4181f91f86ed40e46
+      internalID: 1824468240
       vertices: []
       indices: 
       edges: []
@@ -187,8 +187,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 1c3052bdaa895bd4983e8e0842f4dd6d
-      internalID: -1207981010
+      spriteID: 08274d15f28e29149bbb1672fa5523a8
+      internalID: -215192643
       vertices: []
       indices: 
       edges: []
@@ -208,8 +208,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7a0f1acf4a54f2d429e40c0c54d5c93d
-      internalID: -1062509048
+      spriteID: 90aa36f51505883479b9916e16dcffa9
+      internalID: -416490234
       vertices: []
       indices: 
       edges: []
@@ -229,8 +229,8 @@ TextureImporter:
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 7d9c9f827e2ab5a4b8b49fdaa8281a3c
-      internalID: 1073051297
+      spriteID: 089b81e14c4680c4089e89e869f7343a
+      internalID: -433535758
       vertices: []
       indices: 
       edges: []
@@ -246,12 +246,12 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      GraveRobber_walk_0: -1602653485
-      GraveRobber_walk_1: 744774519
-      GraveRobber_walk_2: -911234193
-      GraveRobber_walk_3: -1207981010
-      GraveRobber_walk_4: -1062509048
-      GraveRobber_walk_5: 1073051297
+      GraveRobber_walk_0: 1736460140
+      GraveRobber_walk_1: 1554094374
+      GraveRobber_walk_2: 1824468240
+      GraveRobber_walk_3: -215192643
+      GraveRobber_walk_4: -416490234
+      GraveRobber_walk_5: -433535758
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 

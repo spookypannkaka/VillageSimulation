@@ -1,5 +1,5 @@
 fileFormatVersion: 2
-guid: 59c20e31bb45df349b2f9e9e2def8344
+guid: 9c45004b008101d4090746a6b983effb
 TextureImporter:
   internalIDToNameTable: []
   externalObjects: {}
@@ -110,43 +110,64 @@ TextureImporter:
     serializedVersion: 2
     sprites:
     - serializedVersion: 2
-      name: Old_man_hurt_0
+      name: Shadows_Sheet_0
       rect:
         serializedVersion: 2
         x: 0
         y: 0
-        width: 48
-        height: 48
-      alignment: 9
-      pivot: {x: 0.3, y: 0.3}
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 0184765801d5ed3489e554703c872b4e
-      internalID: -600691525
+      spriteID: e7ef0ff7916014b4dbf8a3074e62225b
+      internalID: 2052335122
       vertices: []
       indices: 
       edges: []
       weights: []
     - serializedVersion: 2
-      name: Old_man_hurt_1
+      name: Shadows_Sheet_1
       rect:
         serializedVersion: 2
-        x: 48
+        x: 16
         y: 0
-        width: 48
-        height: 48
-      alignment: 9
-      pivot: {x: 0.3, y: 0.3}
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
       border: {x: 0, y: 0, z: 0, w: 0}
       outline: []
       physicsShape: []
       tessellationDetail: 0
       bones: []
-      spriteID: 9ae40c61954574a42a4c4b95aac06380
-      internalID: -1146542900
+      spriteID: 04d3751d4f05ae04b86384c693bcdfa9
+      internalID: -741606566
+      vertices: []
+      indices: 
+      edges: []
+      weights: []
+    - serializedVersion: 2
+      name: Shadows_Sheet_2
+      rect:
+        serializedVersion: 2
+        x: 32
+        y: 0
+        width: 16
+        height: 16
+      alignment: 0
+      pivot: {x: 0.5, y: 0.5}
+      border: {x: 0, y: 0, z: 0, w: 0}
+      outline: []
+      physicsShape: []
+      tessellationDetail: 0
+      bones: []
+      spriteID: 2111a89ae8cf10b409ec3be9ba95a08e
+      internalID: 87261215
       vertices: []
       indices: 
       edges: []
@@ -162,8 +183,9 @@ TextureImporter:
     weights: []
     secondaryTextures: []
     nameFileIdTable:
-      Old_man_hurt_0: -600691525
-      Old_man_hurt_1: -1146542900
+      Shadows_Sheet_0: 2052335122
+      Shadows_Sheet_1: -741606566
+      Shadows_Sheet_2: 87261215
   mipmapLimitGroupName: 
   pSDRemoveMatte: 0
   userData: 
