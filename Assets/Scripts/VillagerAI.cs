@@ -4,6 +4,8 @@ using UnityEngine;
 
 public class VillagerAI : MonoBehaviour
 {
+    [SerializeField] private float roamChangeDirFloat = 2f;
+
     private enum State {
         Roaming
     }
@@ -25,7 +27,7 @@ public class VillagerAI : MonoBehaviour
         {
             Vector2 roamPosition = GetRoamingPosition();
             villagerPathfinding.MoveTo(roamPosition);
-            yield return new WaitForSeconds(2f);
+            yield return new WaitForSeconds(roamChangeDirFloat);
         }
     }
 

@@ -4,11 +4,18 @@ using UnityEngine;
 
 public class PlayerController : MonoBehaviour
 {
+    public bool FacingLeft { get { return facingLeft; } }
+    public static PlayerController Instance;
+
     [SerializeField] private float moveSpeed = 1f;
     [SerializeField] private float runSpeedMultiplier = 2f;
     [SerializeField] private float jumpHeight = 0.5f;
     [SerializeField] private float jumpCooldown = 0.5f;
     [SerializeField] private float jumpDuration = 0.9f;
+    [SerializeField] private GameObject walkAnimPrefab;
+    [SerializeField] private Transform walkAnimSpawnPoint;
+    private bool facingLeft = false;
+
 
     private PlayerControls playerControls;
     private Vector2 movement;
@@ -19,8 +26,10 @@ public class PlayerController : MonoBehaviour
     private bool isJumping;
     private float jumpTimer;
     private float jumpYOffset;
+    private GameObject walkAnim;
 
     private void Awake() {
+        Instance = this;
         playerControls = new PlayerControls();
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
@@ -67,6 +76,19 @@ public class PlayerController : MonoBehaviour
         myAnimator.SetFloat("moveY", movement.y);
         myAnimator.SetBool("isRunning", isRunning);
         myAnimator.SetBool("isJumping", isJumping);
+
+    if (movement.x != 0) {
+        if (walkAnim == null) {
+            walkAnim = Instantiate(walkAnimPrefab, walkAnimSpawnPoint.position, Quaternion.identity);
+            walkAnim.transform.parent = this.transform.parent;
+        }
+
+        // Flip the walk animation based on the player's facing direction
+        Vector3 animScale = walkAnim.transform.localScale;
+        animScale.x = Mathf.Sign(transform.localScale.x);  // Match the player's direction
+        walkAnim.transform.localScale = animScale;
+    }
+
     }
 
     private void StartJump() {
