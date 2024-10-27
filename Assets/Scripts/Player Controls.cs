@@ -206,13 +206,13 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             ""id"": ""d43b3ffb-524b-4bb5-a230-8dbdc3d7b9f5"",
             ""actions"": [
                 {
-                    ""name"": ""New action"",
-                    ""type"": ""Button"",
+                    ""name"": ""Inventory"",
+                    ""type"": ""Value"",
                     ""id"": ""ac9a004c-317f-4550-9358-94cc2c84c4a8"",
-                    ""expectedControlType"": ""Button"",
+                    ""expectedControlType"": """",
                     ""processors"": """",
                     ""interactions"": """",
-                    ""initialStateCheck"": false
+                    ""initialStateCheck"": true
                 },
                 {
                     ""name"": ""Attack"",
@@ -231,17 +231,48 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""UseItem"",
+                    ""type"": ""Button"",
+                    ""id"": ""6031fa0a-5299-4662-be1b-1949ad12c26d"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
                 {
                     ""name"": """",
                     ""id"": ""f2f118b3-8573-435f-9fe8-0963168cf440"",
-                    ""path"": """",
+                    ""path"": ""<Keyboard>/1"",
                     ""interactions"": """",
-                    ""processors"": """",
+                    ""processors"": ""Scale"",
                     ""groups"": """",
-                    ""action"": ""New action"",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1f7facfb-2a22-4df5-a110-b12c4220e751"",
+                    ""path"": ""<Keyboard>/2"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=2)"",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""1ad387c5-7cc8-433b-b37d-9af4aea90bdd"",
+                    ""path"": ""<Keyboard>/3"",
+                    ""interactions"": """",
+                    ""processors"": ""Scale(factor=3)"",
+                    ""groups"": """",
+                    ""action"": ""Inventory"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -288,6 +319,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""Interact"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""08dcdbc9-1b89-4492-bff9-ac942a5c697e"",
+                    ""path"": ""<Keyboard>/f"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""UseItem"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -301,9 +343,10 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Movement_Jump = m_Movement.FindAction("Jump", throwIfNotFound: true);
         // Actions
         m_Actions = asset.FindActionMap("Actions", throwIfNotFound: true);
-        m_Actions_Newaction = m_Actions.FindAction("New action", throwIfNotFound: true);
+        m_Actions_Inventory = m_Actions.FindAction("Inventory", throwIfNotFound: true);
         m_Actions_Attack = m_Actions.FindAction("Attack", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
+        m_Actions_UseItem = m_Actions.FindAction("UseItem", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -427,16 +470,18 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     // Actions
     private readonly InputActionMap m_Actions;
     private List<IActionsActions> m_ActionsActionsCallbackInterfaces = new List<IActionsActions>();
-    private readonly InputAction m_Actions_Newaction;
+    private readonly InputAction m_Actions_Inventory;
     private readonly InputAction m_Actions_Attack;
     private readonly InputAction m_Actions_Interact;
+    private readonly InputAction m_Actions_UseItem;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
         public ActionsActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Newaction => m_Wrapper.m_Actions_Newaction;
+        public InputAction @Inventory => m_Wrapper.m_Actions_Inventory;
         public InputAction @Attack => m_Wrapper.m_Actions_Attack;
         public InputAction @Interact => m_Wrapper.m_Actions_Interact;
+        public InputAction @UseItem => m_Wrapper.m_Actions_UseItem;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -446,28 +491,34 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         {
             if (instance == null || m_Wrapper.m_ActionsActionsCallbackInterfaces.Contains(instance)) return;
             m_Wrapper.m_ActionsActionsCallbackInterfaces.Add(instance);
-            @Newaction.started += instance.OnNewaction;
-            @Newaction.performed += instance.OnNewaction;
-            @Newaction.canceled += instance.OnNewaction;
+            @Inventory.started += instance.OnInventory;
+            @Inventory.performed += instance.OnInventory;
+            @Inventory.canceled += instance.OnInventory;
             @Attack.started += instance.OnAttack;
             @Attack.performed += instance.OnAttack;
             @Attack.canceled += instance.OnAttack;
             @Interact.started += instance.OnInteract;
             @Interact.performed += instance.OnInteract;
             @Interact.canceled += instance.OnInteract;
+            @UseItem.started += instance.OnUseItem;
+            @UseItem.performed += instance.OnUseItem;
+            @UseItem.canceled += instance.OnUseItem;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
         {
-            @Newaction.started -= instance.OnNewaction;
-            @Newaction.performed -= instance.OnNewaction;
-            @Newaction.canceled -= instance.OnNewaction;
+            @Inventory.started -= instance.OnInventory;
+            @Inventory.performed -= instance.OnInventory;
+            @Inventory.canceled -= instance.OnInventory;
             @Attack.started -= instance.OnAttack;
             @Attack.performed -= instance.OnAttack;
             @Attack.canceled -= instance.OnAttack;
             @Interact.started -= instance.OnInteract;
             @Interact.performed -= instance.OnInteract;
             @Interact.canceled -= instance.OnInteract;
+            @UseItem.started -= instance.OnUseItem;
+            @UseItem.performed -= instance.OnUseItem;
+            @UseItem.canceled -= instance.OnUseItem;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -493,8 +544,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     }
     public interface IActionsActions
     {
-        void OnNewaction(InputAction.CallbackContext context);
+        void OnInventory(InputAction.CallbackContext context);
         void OnAttack(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
+        void OnUseItem(InputAction.CallbackContext context);
     }
 }

@@ -184,13 +184,13 @@
             "id": "d43b3ffb-524b-4bb5-a230-8dbdc3d7b9f5",
             "actions": [
                 {
-                    "name": "New action",
-                    "type": "Button",
+                    "name": "Inventory",
+                    "type": "Value",
                     "id": "ac9a004c-317f-4550-9358-94cc2c84c4a8",
-                    "expectedControlType": "Button",
+                    "expectedControlType": "",
                     "processors": "",
                     "interactions": "",
-                    "initialStateCheck": false
+                    "initialStateCheck": true
                 },
                 {
                     "name": "Attack",
@@ -209,17 +209,48 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "UseItem",
+                    "type": "Button",
+                    "id": "6031fa0a-5299-4662-be1b-1949ad12c26d",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
                 {
                     "name": "",
                     "id": "f2f118b3-8573-435f-9fe8-0963168cf440",
-                    "path": "",
+                    "path": "<Keyboard>/1",
                     "interactions": "",
-                    "processors": "",
+                    "processors": "Scale",
                     "groups": "",
-                    "action": "New action",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1f7facfb-2a22-4df5-a110-b12c4220e751",
+                    "path": "<Keyboard>/2",
+                    "interactions": "",
+                    "processors": "Scale(factor=2)",
+                    "groups": "",
+                    "action": "Inventory",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "1ad387c5-7cc8-433b-b37d-9af4aea90bdd",
+                    "path": "<Keyboard>/3",
+                    "interactions": "",
+                    "processors": "Scale(factor=3)",
+                    "groups": "",
+                    "action": "Inventory",
                     "isComposite": false,
                     "isPartOfComposite": false
                 },
@@ -264,6 +295,17 @@
                     "processors": "",
                     "groups": "",
                     "action": "Interact",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "08dcdbc9-1b89-4492-bff9-ac942a5c697e",
+                    "path": "<Keyboard>/f",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "UseItem",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
