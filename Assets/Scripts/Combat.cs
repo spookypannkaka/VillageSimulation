@@ -41,7 +41,7 @@ public class Combat : MonoBehaviour
     }
 
     private void Attack() {
-        if (attackButtonDown && !isAttacking) {
+        if (attackButtonDown && !isAttacking && !PlayerHealth.Instance.IsDead) {
             isAttacking = true;
             myAnimator.SetTrigger("Attack");
             weaponCollider.gameObject.SetActive(true);

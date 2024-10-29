@@ -14,6 +14,7 @@ GameObject:
   - component: {fileID: 1810539769821660771}
   - component: {fileID: 5212184831392413831}
   - component: {fileID: 2742028086122749751}
+  - component: {fileID: -2495749471131651700}
   m_Layer: 0
   m_Name: Box
   m_TagString: Untagged
@@ -76,7 +77,7 @@ SpriteRenderer:
   m_LightmapParameters: {fileID: 0}
   m_SortingLayerID: 0
   m_SortingLayer: 0
-  m_SortingOrder: 0
+  m_SortingOrder: 1
   m_Sprite: {fileID: 21300000, guid: b78d20a6e818ee946bbcaed1f199da0e, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
@@ -121,14 +122,14 @@ Rigidbody2D:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 716923427219785766}
-  m_BodyType: 0
+  m_BodyType: 2
   m_Simulated: 1
   m_UseFullKinematicContacts: 0
   m_UseAutoMass: 0
   m_Mass: 1
   m_LinearDrag: 0
   m_AngularDrag: 0.05
-  m_GravityScale: 1
+  m_GravityScale: 0
   m_Material: {fileID: 0}
   m_IncludeLayers:
     serializedVersion: 2
@@ -191,3 +192,18 @@ PolygonCollider2D:
       - {x: 0.3125, y: 0.28125}
       - {x: 0.25, y: 0.34375}
   m_UseDelaunayMesh: 0
+--- !u!114 &-2495749471131651700
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 716923427219785766}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fa56cae88c17a2749885696f5982237e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  coin: {fileID: 794070605948636191, guid: 7df06f4306e1189478bcabde3884148e, type: 3}
+  healthGlobe: {fileID: 794070605948636191, guid: 19b0a1add18987a43a6c109eeb9afa04, type: 3}
+  staminaGlobe: {fileID: 794070605948636191, guid: acd4672193f13ac42a081ea33fd8dc56, type: 3}

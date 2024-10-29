@@ -21,6 +21,7 @@ public class PlayerController : Singleton<PlayerController>
     private Rigidbody2D rb;
     private Animator myAnimator;
     private SpriteRenderer mySpriteRender;
+    private Knockback knockback;
     private bool isRunning;
     private bool isJumping;
     private float jumpTimer;
@@ -33,6 +34,7 @@ public class PlayerController : Singleton<PlayerController>
         rb = GetComponent<Rigidbody2D>();
         myAnimator = GetComponent<Animator>();
         mySpriteRender = GetComponent<SpriteRenderer>();
+        knockback = GetComponent<Knockback>();
     }
 
     private void OnEnable() {
@@ -64,6 +66,14 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     private void Move() {
+        if (knockback.GettingKnockedBack || PlayerHealth.Instance.IsDead) {
+            myAnimator.SetFloat("moveX", 0);
+            myAnimator.SetFloat("moveY", 0);
+            myAnimator.SetBool("isRunning", false);
+            myAnimator.SetBool("isJumping", false);
+            return;
+        }
+
         float currentSpeed = isRunning ? moveSpeed * runSpeedMultiplier : moveSpeed;
 
         Vector2 newPosition = rb.position + movement * (currentSpeed * Time.fixedDeltaTime);
@@ -91,6 +101,8 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     private void StartJump() {
+        if (knockback.GettingKnockedBack || PlayerHealth.Instance.IsDead) { return; }
+
         myAnimator.SetTrigger("isJumping");
         isJumping = true;
 
@@ -131,6 +143,8 @@ public class PlayerController : Singleton<PlayerController>
     }
 
     private void Flip() {
+        if (knockback.GettingKnockedBack || PlayerHealth.Instance.IsDead) { return; }
+
         Vector3 newScale = transform.localScale;
         newScale.x *= -1;
         transform.localScale = newScale;
