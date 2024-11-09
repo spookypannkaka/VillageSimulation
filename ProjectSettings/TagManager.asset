@@ -3,7 +3,10 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags: []
+  tags:
+  - Villager
+  - Building
+  - Wanderpoint
   layers:
   - Default
   - TransparentFX
@@ -11,8 +14,8 @@ TagManager:
   - Cinemachine Confiner
   - Water
   - UI
-  - 
-  - 
+  - FOV
+  - DetectionRadius
   - 
   - 
   - 

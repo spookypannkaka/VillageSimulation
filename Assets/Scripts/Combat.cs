@@ -11,10 +11,12 @@ public class Combat : MonoBehaviour
     private Animator myAnimator;
     private bool attackButtonDown, isAttacking = false;
 
-    
+    private PlayerActions playerActions;
+
     private void Awake() {
         myAnimator = GetComponent<Animator>();
         playerControls = new PlayerControls();
+        playerActions = GetComponent<PlayerActions>();
     }
 
     private void OnEnable() {
