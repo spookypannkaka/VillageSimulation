@@ -285,6 +285,9 @@ GameObject:
   - component: {fileID: 7727836056190007650}
   - component: {fileID: 576472302623127866}
   - component: {fileID: 2983054926173168217}
+  - component: {fileID: 2117082855753802675}
+  - component: {fileID: -5773152759734089476}
+  - component: {fileID: -8223538620457521014}
   m_Layer: 0
   m_Name: Villager
   m_TagString: Villager
@@ -351,7 +354,7 @@ SpriteRenderer:
   m_SortingLayerID: 0
   m_SortingLayer: 0
   m_SortingOrder: 1
-  m_Sprite: {fileID: 1604374624, guid: 3ef0dc8950822a546a034ad95cc0b4ee, type: 3}
+  m_Sprite: {fileID: -1604874637, guid: 3e982606b3049d54c8294934565549c1, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -441,7 +444,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 7245166583846347435}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3af75164c96604b4b9da95b03ac23dce, type: 3}
   m_Name: 
@@ -641,3 +644,52 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4d2bf936429063f4ea57e0a2efcc1ea0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2117082855753802675
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7245166583846347435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c29cff538c195c249b69c6f2236de67b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Library: []
+  m_SpriteLibraryAsset: {fileID: 7108339969198208228, guid: c51c6b59ead74934f8d0d09430380668, type: 3}
+--- !u!114 &-5773152759734089476
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7245166583846347435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ed8b1ae4e4e52b34ea557c1c11e076fc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_CategoryHash: 1.8625731e-11
+  m_labelHash: 0.000000005978198
+  m_SpriteKey: 0
+  m_SpriteHash: 745144890
+--- !u!114 &-8223538620457521014
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7245166583846347435}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 51ecb93af67e9ce44a3dab592c7dbb84, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  villagerType: 0
+  oldManLibrary: {fileID: 7108339969198208228, guid: c51c6b59ead74934f8d0d09430380668, type: 3}
+  womanLibrary: {fileID: 7108339969198208228, guid: e88cb8ca0aa20f147a7752ff5ed4d10e, type: 3}
+  manLibrary: {fileID: 7108339969198208228, guid: 321da510af1e2f1428317644aba4aad1, type: 3}
+  oldWomanLibrary: {fileID: 7108339969198208228, guid: 71f5a3e25a1190643ac52901a8014da3, type: 3}
+  boyLibrary: {fileID: 7108339969198208228, guid: 01e10ec3669d7764eadc200c0c313761, type: 3}
+  girlLibrary: {fileID: 7108339969198208228, guid: 0bffab45a0bf06642b1924b102a24be2, type: 3}

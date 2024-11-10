@@ -34,8 +34,8 @@ public class PlayerHealth : Singleton<PlayerHealth>
         VillagerAI villager = other.gameObject.GetComponent<VillagerAI>();
 
         if (villager && canTakeDamage) {
-            TakeDamage(1);
-            knockback.GetKnockedBack(other.gameObject.transform, knockBackThrustAmount);
+            //TakeDamage(1);
+            //knockback.GetKnockedBack(other.gameObject.transform, knockBackThrustAmount);
         }
     }
 

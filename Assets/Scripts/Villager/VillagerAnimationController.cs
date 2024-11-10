@@ -2,18 +2,23 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using Pathfinding;
+using UnityEngine.U2D.Animation;
 
 public class VillagerAnimationController : MonoBehaviour
 {
     private AIPath aiPath;
     private Animator animator;
     private SpriteRenderer spriteRenderer;
+    private SpriteResolver spriteResolver;
+    private VillagerAppearanceController appearanceController;
 
     void Awake()
     {
         aiPath = GetComponent<AIPath>();
         animator = GetComponent<Animator>();
         spriteRenderer = GetComponent<SpriteRenderer>();
+        spriteResolver = GetComponent<SpriteResolver>();
+        appearanceController = GetComponent<VillagerAppearanceController>();
     }
 
     void Update()
