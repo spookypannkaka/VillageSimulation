@@ -4,33 +4,38 @@ using UnityEngine;
 
 public class DeadState : IVillagerState
 {
+    private Selector rootNode;
+    private VillagerController villager;
+
+    public DeadState(VillagerController villager)
+    {
+        this.villager = villager;
+        InitializeBehaviorTree();
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        rootNode = new Selector(new List<BTNode>
+        {
+            new Sequence(new List<BTNode>
+            {
+
+            }),
+        });
+    }
+
     public void EnterState(VillagerController villager)
     {
-        Debug.Log("I am dead");
+        Debug.Log("Entering Dead State");
     }
 
     public void UpdateState(VillagerController villager)
     {
-        // 
+        rootNode.Execute(villager);
     }
 
     public void ExitState(VillagerController villager)
     {
-        // 
-    }
-
-    public void HandleSteal(VillagerController villager)
-    {
-        // Dead people do not react to stealing
-    }
-
-    public void HandleGift(VillagerController villager)
-    {
-        // Dead people do not receive gifts
-    }
-
-    public void HandleAttack(VillagerController villager)
-    {
-        // Dead people can't be attacked
+        //
     }
 }

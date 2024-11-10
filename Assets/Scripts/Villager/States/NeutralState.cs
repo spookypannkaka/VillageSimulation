@@ -4,48 +4,56 @@ using UnityEngine;
 
 public class NeutralState : IVillagerState
 {
+    private Selector rootNode;
+    private VillagerController villager;
+
+    public NeutralState(VillagerController villager)
+    {
+        this.villager = villager;
+        InitializeBehaviorTree();
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        rootNode = new Selector(new List<BTNode>
+        {
+            // Villager under attack
+            new Sequence(new List<BTNode>
+            {
+                new CheckIfUnderAttack(),
+                new FightOrFleeAction()
+            }),
+
+            // Player steals an item
+            new Sequence(new List<BTNode>
+            {
+                new CheckIfPlayerIsStealing(),
+                new TransitionToAlertedAction() // Transition to AlertedState if player is stealing
+            }),
+
+            // Villager receives a gift
+            new Sequence(new List<BTNode>
+            {
+                new CheckIfPlayerIsGivingGift(),
+                new ReceiveGiftAction(),
+                new TransitionToFriendAction() // Transition to FriendState after receiving a gift
+            }),
+            new WanderAction() // Default action to wander
+        });
+    }
+
     public void EnterState(VillagerController villager)
     {
-        Debug.Log("I am neutral");
-        //villager.GetComponent<RandomWalker>().enabled = true;
-        villager.GetComponent<VillagerWander>().enabled = true;
+        Debug.Log("Entering Neutral State");
     }
 
     public void UpdateState(VillagerController villager)
     {
-        // Code to handle neutral state behavior, e.g., wandering around
+        rootNode.Execute(villager);
     }
 
     public void ExitState(VillagerController villager)
     {
         villager.GetComponent<VillagerWander>().enabled = false;
-    }
-
-    public void HandleSteal(VillagerController villager)
-    {
-        if (villager.IsPlayerInFOV)
-        {
-            villager.TransitionToState(villager.AlertedState);
-        }
-    }
-
-    public void HandleGift(VillagerController villager)
-    {
-        villager.TransitionToState(villager.FriendState);
-    }
-
-    public void HandleAttack(VillagerController villager)
-    {
-        if (villager.IsPlayerInFOV || villager.IsPlayerInRadius)
-        {
-            if (villager.personality.Bravery > 0.5f)
-            {
-                villager.TransitionToState(villager.FightingState);
-            }
-            else
-            {
-                villager.TransitionToState(villager.FleeingState);
-            }
-        }
     }
 }

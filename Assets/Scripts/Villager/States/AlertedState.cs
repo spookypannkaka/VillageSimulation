@@ -4,47 +4,40 @@ using UnityEngine;
 
 public class AlertedState : IVillagerState
 {
+    private Selector rootNode;
+    private VillagerController villager;
+
+    public AlertedState(VillagerController villager)
+    {
+        this.villager = villager;
+        InitializeBehaviorTree();
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        rootNode = new Selector(new List<BTNode>
+        {
+            new Sequence(new List<BTNode>
+            {
+                new CheckIfUnderAttack(),
+                new FightOrFleeAction() // Either fight or flee based on bravery
+            }),
+            new WanderAction() // Fallback to wandering if no threat detected
+        });
+    }
+
     public void EnterState(VillagerController villager)
     {
-        Debug.Log("I am alerted");
-        villager.GetComponent<VillagerWander>().enabled = true;
+        Debug.Log("Entering Alerted State");
     }
 
     public void UpdateState(VillagerController villager)
     {
-        // 
+        rootNode.Execute(villager);
     }
 
     public void ExitState(VillagerController villager)
     {
-        villager.GetComponent<VillagerWander>().enabled = false;
-    }
-
-    public void HandleSteal(VillagerController villager)
-    {
-        if (villager.personality.Bravery > 0.5f)
-        {
-            villager.TransitionToState(villager.FightingState);
-        }
-    }
-
-    public void HandleGift(VillagerController villager)
-    {
-        villager.TransitionToState(villager.NeutralState);
-    }
-
-    public void HandleAttack(VillagerController villager)
-    {
-        if (villager.IsPlayerInFOV || villager.IsPlayerInRadius)
-        {
-            if (villager.personality.Bravery > 0.5f)
-            {
-                villager.TransitionToState(villager.FightingState);
-            }
-            else
-            {
-                villager.TransitionToState(villager.FleeingState);
-            }
-        }
+        //villager.GetComponent<VillagerWander>().enabled = false;
     }
 }

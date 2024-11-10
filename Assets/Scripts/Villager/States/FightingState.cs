@@ -4,34 +4,39 @@ using UnityEngine;
 
 public class FightingState : IVillagerState
 {
+    private Selector rootNode;
+    private VillagerController villager;
+
+    public FightingState(VillagerController villager)
+    {
+        this.villager = villager;
+        InitializeBehaviorTree();
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        rootNode = new Selector(new List<BTNode>
+        {
+            new Sequence(new List<BTNode>
+            {
+
+            }),
+            new WanderAction() // Default action to wander
+        });
+    }
+
     public void EnterState(VillagerController villager)
     {
-       Debug.Log("I am fighting");
+        Debug.Log("Entering Fighting State");
     }
 
     public void UpdateState(VillagerController villager)
     {
-        // 
+        rootNode.Execute(villager);
     }
 
     public void ExitState(VillagerController villager)
     {
-        // 
-    }
-
-    public void HandleSteal(VillagerController villager)
-    {
-        // Villagers that fight don't care if you steal
-    }
-
-    public void HandleGift(VillagerController villager)
-    {
-        // Fighting villagers do not accept gifts
-    }
-
-    public void HandleAttack(VillagerController villager)
-    {
-        // Maybe we should change loyalty if we attack a loyal villager
-        // (But they don't care if you attack other villagers)
+        //
     }
 }

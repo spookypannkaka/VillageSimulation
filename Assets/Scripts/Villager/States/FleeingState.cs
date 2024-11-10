@@ -4,23 +4,35 @@ using UnityEngine;
 
 public class FleeingState : IVillagerState
 {
+    private Selector rootNode;
+    private VillagerController villager;
+
+    public FleeingState(VillagerController villager)
+    {
+        this.villager = villager;
+        InitializeBehaviorTree();
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        rootNode = new Selector(new List<BTNode>
+        {
+            new FleeAction()
+        });
+    }
+
     public void EnterState(VillagerController villager)
     {
-        Debug.Log("I am fleeing");
-        villager.GetComponent<VillagerFleeing>().enabled = true;
+        Debug.Log("Entering Fleeing State");
     }
 
     public void UpdateState(VillagerController villager)
     {
-        // 
+        rootNode.Execute(villager);
     }
 
     public void ExitState(VillagerController villager)
     {
         villager.GetComponent<VillagerFleeing>().enabled = false;
     }
-
-    public void HandleSteal(VillagerController villager) { /* Fleeing villagers ignore theft */ }
-    public void HandleGift(VillagerController villager) { /* Fleeing villagers ignore gifts */ }
-    public void HandleAttack(VillagerController villager) { /* Fleeing villagers continue fleeing if attacked */ }
 }

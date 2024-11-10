@@ -4,34 +4,39 @@ using UnityEngine;
 
 public class FriendState : IVillagerState
 {
+    private Selector rootNode;
+    private VillagerController villager;
+
+    public FriendState(VillagerController villager)
+    {
+        this.villager = villager;
+        InitializeBehaviorTree();
+    }
+
+    private void InitializeBehaviorTree()
+    {
+        rootNode = new Selector(new List<BTNode>
+        {
+            new Sequence(new List<BTNode>
+            {
+
+            }),
+            new WanderAction() // Default action to wander
+        });
+    }
+
     public void EnterState(VillagerController villager)
     {
-        Debug.Log("I am friendly");
-        villager.GetComponent<VillagerWander>().enabled = true;
+        Debug.Log("Entering Friend State");
     }
 
     public void UpdateState(VillagerController villager)
     {
-        // 
+        rootNode.Execute(villager);
     }
 
     public void ExitState(VillagerController villager)
     {
-        villager.GetComponent<VillagerWander>().enabled = false;
-    }
-
-    public void HandleSteal(VillagerController villager)
-    {
-        // Friendly villagers do not care if you steal
-    }
-
-    public void HandleGift(VillagerController villager)
-    {
-        // Friendly villagers cannot become more loyal
-    }
-
-    public void HandleAttack(VillagerController villager)
-    {
-        // We need to handle a situation where loyalty can change if you attack them
+        //
     }
 }
