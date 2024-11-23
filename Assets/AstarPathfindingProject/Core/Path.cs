@@ -704,7 +704,7 @@ namespace Pathfinding {
 		/// See: DebugString
 		/// </summary>
 		protected void DebugStringPrefix (PathLog logMode, System.Text.StringBuilder text) {
-			text.Append(error ? "Path Failed : " : "Path Completed : ");
+			/*text.Append(error ? "Path Failed : " : "Path Completed : ");
 			text.Append("Computation Time ");
 			text.Append(duration.ToString(logMode == PathLog.Heavy ? "0.000 ms " : "0.00 ms "));
 
@@ -713,7 +713,7 @@ namespace Pathfinding {
 			if (!error) {
 				text.Append(" Path Length ");
 				text.Append(path == null ? "Null" : path.Count.ToString());
-			}
+			}*/
 		}
 
 		/// <summary>

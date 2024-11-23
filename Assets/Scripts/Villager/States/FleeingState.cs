@@ -29,6 +29,7 @@ public class FleeingState : IVillagerState
     public void UpdateState(VillagerController villager)
     {
         rootNode.Execute(villager);
+        villager.ConsumeActionFlags();
     }
 
     public void ExitState(VillagerController villager)

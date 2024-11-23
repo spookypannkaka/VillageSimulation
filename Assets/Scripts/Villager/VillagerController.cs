@@ -7,7 +7,7 @@ public class VillagerController : MonoBehaviour
 {
     // Managing states
     private IVillagerState currentState;
-    public IVillagerState CurrentState { get; private set; }
+    public IVillagerState CurrentState { get => currentState; }
     public IVillagerState NeutralState { get; private set; }
     public IVillagerState AlertedState { get; private set; }
     public IVillagerState FriendState { get; private set; }
@@ -18,6 +18,7 @@ public class VillagerController : MonoBehaviour
     // Villager status icon
     public SpriteRenderer statusIconRenderer;
     public Sprite neutralIcon, alertedIcon, friendIcon, fleeingIcon, fightingIcon, deadIcon;
+    public GameObject highlightEffect;
 
     // Villager personality
     public Personality personality;
@@ -28,6 +29,7 @@ public class VillagerController : MonoBehaviour
     // Villager vicinity detection
     public bool IsPlayerInFOV { get; private set; }
     public bool IsPlayerInRadius { get; private set; }
+    public bool IsPlayerInVillagerArea { get; private set; }
     // Event that other villagers can listen to for nearby attacks
     public UnityEvent<Vector2> OnVillagerAttackedNearby = new UnityEvent<Vector2>();
     // Flags to communicate events to the behavior tree
@@ -48,7 +50,13 @@ public class VillagerController : MonoBehaviour
     private void Update()
     {
         currentState.UpdateState(this); // Let the current state handle all state-specific logic
-        ResetFlags(); // Reset flags after each update cycle
+        //ResetFlags(); // Reset flags after each update cycle
+    }
+
+    public void ConsumeActionFlags()
+    {
+        // Call this method explicitly after behavior tree processing
+        ResetFlags();
     }
 
     private void InitializeStates()
@@ -154,6 +162,10 @@ public class VillagerController : MonoBehaviour
         IsPlayerInRadius = inRadius;
     }
 
+    public void SetPlayerInVillagerArea(bool inVillagerArea) {
+        IsPlayerInVillagerArea = inVillagerArea;
+    }
+
     public void UpdateStatusIcon(Sprite newIcon)
     {
         statusIconRenderer.sprite = newIcon;
@@ -175,7 +187,11 @@ public class VillagerController : MonoBehaviour
         UpdateStatusIcon(iconToUse);
     }
 
-    public void ReceiveGift() {
-        
+    public void SetHighlight(bool isActive)
+    {
+        if (highlightEffect != null)
+        {
+            highlightEffect.SetActive(isActive);
+        }
     }
 }

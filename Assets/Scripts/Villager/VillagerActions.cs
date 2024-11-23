@@ -69,7 +69,18 @@ public class ReceiveGiftAction : BTNode
 {
     public override bool Execute(VillagerController villager)
     {
-        villager.ReceiveGift();
+        if (!PlayerInventory.Instance.HasCake) return false;
+        
+        if (villager.CurrentState is NeutralState) {
+            PlayerInventory.Instance.GiftCake();
+            villager.TransitionToState(villager.FriendState);
+        } else if (villager.CurrentState is AlertedState) {
+            PlayerInventory.Instance.GiftCake();
+            villager.TransitionToState(villager.NeutralState);
+        } else {
+            return false;
+        }
+
         return true;
     }
 }

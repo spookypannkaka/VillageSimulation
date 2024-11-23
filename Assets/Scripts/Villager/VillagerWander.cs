@@ -83,7 +83,6 @@ public class VillagerWander : MonoBehaviour
         aiPath.SearchPath();
 
         isWalking = true;
-        Debug.Log("Villager walking to new waypoint at: " + targetPosition);
     }
 
     void Update()
@@ -97,7 +96,6 @@ public class VillagerWander : MonoBehaviour
 
     private IEnumerator IdleAtWaypoint()
     {
-        Debug.Log("Villager idling at waypoint.");
         isWalking = false;
         
         // Wait at the waypoint for a short duration before choosing a new target

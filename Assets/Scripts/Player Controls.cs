@@ -240,6 +240,15 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Steal"",
+                    ""type"": ""Button"",
+                    ""id"": ""ed76f5d1-c53d-4bf6-8936-4c5ee4a2b70f"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -330,6 +339,17 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
                     ""action"": ""UseItem"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7f098420-e230-4b56-a074-86f3c8d2bc14"",
+                    ""path"": ""<Keyboard>/r"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Steal"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
                 }
             ]
         }
@@ -347,6 +367,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         m_Actions_Attack = m_Actions.FindAction("Attack", throwIfNotFound: true);
         m_Actions_Interact = m_Actions.FindAction("Interact", throwIfNotFound: true);
         m_Actions_UseItem = m_Actions.FindAction("UseItem", throwIfNotFound: true);
+        m_Actions_Steal = m_Actions.FindAction("Steal", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -474,6 +495,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
     private readonly InputAction m_Actions_Attack;
     private readonly InputAction m_Actions_Interact;
     private readonly InputAction m_Actions_UseItem;
+    private readonly InputAction m_Actions_Steal;
     public struct ActionsActions
     {
         private @PlayerControls m_Wrapper;
@@ -482,6 +504,7 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         public InputAction @Attack => m_Wrapper.m_Actions_Attack;
         public InputAction @Interact => m_Wrapper.m_Actions_Interact;
         public InputAction @UseItem => m_Wrapper.m_Actions_UseItem;
+        public InputAction @Steal => m_Wrapper.m_Actions_Steal;
         public InputActionMap Get() { return m_Wrapper.m_Actions; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -503,6 +526,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseItem.started += instance.OnUseItem;
             @UseItem.performed += instance.OnUseItem;
             @UseItem.canceled += instance.OnUseItem;
+            @Steal.started += instance.OnSteal;
+            @Steal.performed += instance.OnSteal;
+            @Steal.canceled += instance.OnSteal;
         }
 
         private void UnregisterCallbacks(IActionsActions instance)
@@ -519,6 +545,9 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
             @UseItem.started -= instance.OnUseItem;
             @UseItem.performed -= instance.OnUseItem;
             @UseItem.canceled -= instance.OnUseItem;
+            @Steal.started -= instance.OnSteal;
+            @Steal.performed -= instance.OnSteal;
+            @Steal.canceled -= instance.OnSteal;
         }
 
         public void RemoveCallbacks(IActionsActions instance)
@@ -548,5 +577,6 @@ public partial class @PlayerControls: IInputActionCollection2, IDisposable
         void OnAttack(InputAction.CallbackContext context);
         void OnInteract(InputAction.CallbackContext context);
         void OnUseItem(InputAction.CallbackContext context);
+        void OnSteal(InputAction.CallbackContext context);
     }
 }

@@ -9,7 +9,8 @@ public class DetectionTrigger : MonoBehaviour
     public enum DetectionType
     {
         FOV,
-        DetectionRadius
+        DetectionRadius,
+        VillagerArea
     }
 
     [Tooltip("The type of detection area this represents (e.g., FOV, DetectionRadius).")]
@@ -30,6 +31,10 @@ public class DetectionTrigger : MonoBehaviour
                 case DetectionType.DetectionRadius:
                     controller.SetPlayerInRadius(true);
                     break;
+                case DetectionType.VillagerArea:
+                    controller.SetPlayerInVillagerArea(true);
+                    VillagerManager.Instance.EnterVillagerArea(controller);
+                    break;
             }
         }
     }
@@ -45,6 +50,10 @@ public class DetectionTrigger : MonoBehaviour
                     break;
                 case DetectionType.DetectionRadius:
                     controller.SetPlayerInRadius(false);
+                    break;
+                case DetectionType.VillagerArea:
+                    controller.SetPlayerInVillagerArea(false);
+                    VillagerManager.Instance.ExitVillagerArea(controller);
                     break;
             }
         }

@@ -33,6 +33,7 @@ public class FriendState : IVillagerState
     public void UpdateState(VillagerController villager)
     {
         rootNode.Execute(villager);
+        villager.ConsumeActionFlags();
     }
 
     public void ExitState(VillagerController villager)
