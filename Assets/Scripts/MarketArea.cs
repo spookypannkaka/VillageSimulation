@@ -27,6 +27,7 @@ public class MarketArea : MonoBehaviour
     {
         return playerInMarketCount > 0;
     }
+
 public static void AddMarketActions(Dictionary<string, ActionManager.ActionData> actions)
     {
         string purchaseKey = PlayerController.Instance.GetKeyBinding("Interact");
@@ -37,7 +38,7 @@ public static void AddMarketActions(Dictionary<string, ActionManager.ActionData>
             // Add purchase action
             actions[purchaseKey] = new ActionManager.ActionData
             {
-                DisplayName = "Purchase Cake",
+                DisplayName = "Purchase Cake (3 coins)",
                 KeyBinding = purchaseKey,
                 Execute = () =>
                 {

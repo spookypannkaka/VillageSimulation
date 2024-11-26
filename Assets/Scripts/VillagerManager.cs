@@ -3,12 +3,25 @@ using UnityEngine;
 
 public class VillagerManager : Singleton<VillagerManager>
 {
+    private List<VillagerController> villagers = new List<VillagerController>();
     private List<VillagerController> activeVillagers = new List<VillagerController>();
     private VillagerController currentActiveVillager;
 
     protected override void Awake()
     {
         base.Awake();
+    }
+
+    public void RegisterVillager(VillagerController villager)
+    {
+        if (!villagers.Contains(villager))
+            villagers.Add(villager);
+    }
+
+    public void UnregisterVillager(VillagerController villager)
+    {
+        if (villagers.Contains(villager))
+            villagers.Remove(villager);
     }
 
     public void EnterVillagerArea(VillagerController controller)
@@ -64,6 +77,15 @@ public class VillagerManager : Singleton<VillagerManager>
             {
                 currentActiveVillager.SetHighlight(true);
             }
+        }
+    }
+
+    public void NotifyVillagersPlayerIsStealing()
+    {
+        foreach (var villager in villagers)
+        {
+            if (villager.IsPlayerInFOV)
+                villager.SetIsPlayerStealing(true);
         }
     }
 

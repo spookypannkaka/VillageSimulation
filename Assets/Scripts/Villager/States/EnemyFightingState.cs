@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class FightingState : IVillagerState
+public class EnemyFightingState : IVillagerState
 {
     private Selector rootNode;
     private VillagerController villager;
 
-    public FightingState(VillagerController villager)
+    public EnemyFightingState(VillagerController villager)
     {
         this.villager = villager;
         InitializeBehaviorTree();
@@ -28,6 +28,9 @@ public class FightingState : IVillagerState
     public void EnterState(VillagerController villager)
     {
         Debug.Log("Entering Fighting State");
+        if (villager.GetComponent<VillagerWander>().enabled) {
+            villager.GetComponent<VillagerWander>().enabled = false;
+        }
     }
 
     public void UpdateState(VillagerController villager)

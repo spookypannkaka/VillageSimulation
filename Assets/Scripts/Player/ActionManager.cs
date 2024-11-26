@@ -31,6 +31,18 @@ public class ActionManager : MonoBehaviour
             VillagerArea.AddVillagerActions(availableActions);
         }
 
+        string useKey = PlayerController.Instance.GetKeyBinding("UseItem");
+        if (PlayerInventory.Instance.HasCake) {
+            availableActions[useKey] = new ActionManager.ActionData
+            {
+                DisplayName = "Eat Cake",
+                KeyBinding = useKey,
+                Execute = () =>
+                {
+                }
+            };
+        }
+
         UpdateControlsText();
     }
 

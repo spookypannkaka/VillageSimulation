@@ -80,7 +80,7 @@ public class PlayerController : Singleton<PlayerController>
 
     }
 
-    private void HandleInteract()
+    /*private void HandleInteract()
     {
         // Check if there is an active villager and the player has a cake
         VillagerController activeVillager = VillagerManager.Instance.GetActiveVillager();
@@ -95,6 +95,31 @@ public class PlayerController : Singleton<PlayerController>
                 Debug.Log("No active villager nearby to interact with.");
             } else if (!PlayerInventory.Instance.HasCake) {
                 Debug.Log("You need a cake to gift it.");
+            }
+        }
+    }*/
+
+    private void HandleInteract()
+    {
+        if (MarketArea.IsPlayerInAnyMarket()) {
+            // Player is in a market, attempt to purchase a cake
+            if (EconomyManager.Instance.CanAffordCake() && !PlayerInventory.Instance.HasCake) {  // Check if player already has a cake, if your game logic requires it
+                PlayerInventory.Instance.PurchaseCake();
+            } else {
+                Debug.Log("Can't afford cake / You already have a cake.");
+            }
+        } else {
+            // Handle interactions with villagers
+            VillagerController activeVillager = VillagerManager.Instance.GetActiveVillager();
+            if (activeVillager != null && PlayerInventory.Instance.HasCake) {
+                playerActions.AttemptToGiveGift();
+            } else {
+                // Provide feedback why interaction isn't possible
+                if (activeVillager == null) {
+                    Debug.Log("No active villager nearby to interact with.");
+                } else if (!PlayerInventory.Instance.HasCake) {
+                    Debug.Log("You need a cake to gift it.");
+                }
             }
         }
     }

@@ -22,6 +22,7 @@ public class PlayerActions : Singleton<PlayerActions>
     public void Steal(Vector3 itemPosition)
     {
         actionManager.TryExecuteAction(PlayerController.Instance.GetKeyBinding("Steal"));
+        OnStealItem.Invoke(itemPosition);
     }
 
     public void Attack(Vector3 attackPosition)
@@ -31,7 +32,7 @@ public class PlayerActions : Singleton<PlayerActions>
 
     public void UseItem(InputAction.CallbackContext context)
     {
-        if (context.started && PlayerInventory.Instance.HasCake)
+        if (PlayerInventory.Instance.HasCake)
         {
             PlayerInventory.Instance.EatCake();
         }

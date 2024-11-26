@@ -49,7 +49,7 @@ public class VillagerFleeing : MonoBehaviour
         // Choose a random EntranceSpot and get its collider's center
         int randomIndex = Random.Range(0, availableSpots.Count);
         Transform chosenSpot = availableSpots[randomIndex];
-        availableSpots.RemoveAt(randomIndex);
+        //availableSpots.RemoveAt(randomIndex);
 
         // Get the Collider2D component from the chosen EntranceSpot
         Collider2D entranceCollider = chosenSpot.GetComponent<Collider2D>();
@@ -87,7 +87,7 @@ public class VillagerFleeing : MonoBehaviour
     {
         aiPath.destination = transform.position; // Set destination to current position
         aiPath.maxSpeed = 0f;                    // Stop movement
-        aiPath.enabled = false;                  // Optionally, disable AIPath to stop recalculations
+        //aiPath.enabled = false;                  // Optionally, disable AIPath to stop recalculations
         enabled = false;                         // Disable this fleeing script
     }
 

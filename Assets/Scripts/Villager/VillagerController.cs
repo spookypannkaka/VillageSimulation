@@ -11,7 +11,8 @@ public class VillagerController : MonoBehaviour
     public IVillagerState NeutralState { get; private set; }
     public IVillagerState AlertedState { get; private set; }
     public IVillagerState FriendState { get; private set; }
-    public IVillagerState FightingState { get; private set; }
+    public IVillagerState EnemyFightingState { get; private set; }
+    public IVillagerState FriendFightingState { get; private set; }
     public IVillagerState FleeingState { get; private set; }
     public IVillagerState DeadState { get; private set; }
 
@@ -30,6 +31,8 @@ public class VillagerController : MonoBehaviour
     public bool IsPlayerInFOV { get; private set; }
     public bool IsPlayerInRadius { get; private set; }
     public bool IsPlayerInVillagerArea { get; private set; }
+    public bool IsNearCombatVillager { get; private set; }
+    
     // Event that other villagers can listen to for nearby attacks
     public UnityEvent<Vector2> OnVillagerAttackedNearby = new UnityEvent<Vector2>();
     // Flags to communicate events to the behavior tree
@@ -53,6 +56,16 @@ public class VillagerController : MonoBehaviour
         //ResetFlags(); // Reset flags after each update cycle
     }
 
+    private void OnEnable()
+    {
+        VillagerManager.Instance.RegisterVillager(this);
+    }
+
+    private void OnDisable()
+    {
+        VillagerManager.Instance.UnregisterVillager(this);
+    }
+
     public void ConsumeActionFlags()
     {
         // Call this method explicitly after behavior tree processing
@@ -65,7 +78,8 @@ public class VillagerController : MonoBehaviour
         NeutralState = new NeutralState(this);
         AlertedState = new AlertedState(this);
         FriendState = new FriendState(this);
-        FightingState = new FightingState(this);
+        EnemyFightingState = new EnemyFightingState(this);
+        FriendFightingState = new FriendFightingState(this);
         FleeingState = new FleeingState(this);
         DeadState = new DeadState(this);
     }
@@ -100,7 +114,10 @@ public class VillagerController : MonoBehaviour
     // Event handlers for player actions
     public void OnPlayerStealsItem()
     {
-        IsPlayerStealing = true;
+        if (IsPlayerInFOV)
+        {
+            IsPlayerStealing = true;
+        }
     }
 
     public void OnPlayerGiftsItem()
@@ -144,10 +161,13 @@ public class VillagerController : MonoBehaviour
 
     public void TransitionToState(IVillagerState newState)
     {
-        currentState?.ExitState(this);
-        currentState = newState;
-        currentState.EnterState(this);
-        UpdateStatusIconBasedOnState(newState);
+        if (currentState != newState)
+        {
+            currentState?.ExitState(this);
+            currentState = newState;
+            newState.EnterState(this);
+            UpdateStatusIconBasedOnState(newState);
+        }
     }
 
     // Method to update FOV status
@@ -166,6 +186,14 @@ public class VillagerController : MonoBehaviour
         IsPlayerInVillagerArea = inVillagerArea;
     }
 
+    public void SetIsPlayerStealing(bool isStealing) {
+        IsPlayerStealing = isStealing;
+    }
+
+    public void SetIsNearCombatVillager(bool isNearCombatVillager) {
+        IsNearCombatVillager = isNearCombatVillager;
+    }
+
     public void UpdateStatusIcon(Sprite newIcon)
     {
         statusIconRenderer.sprite = newIcon;
@@ -178,7 +206,8 @@ public class VillagerController : MonoBehaviour
             NeutralState _ => neutralIcon,
             AlertedState _ => alertedIcon,
             FriendState _ => friendIcon,
-            FightingState _ => fightingIcon,
+            EnemyFightingState _ => fightingIcon,
+            FriendFightingState _ => friendIcon,
             FleeingState _ => fleeingIcon,
             DeadState _ => deadIcon,
             _ => null
@@ -193,5 +222,11 @@ public class VillagerController : MonoBehaviour
         {
             highlightEffect.SetActive(isActive);
         }
+    }
+
+    public bool IsInCombatOrDead()
+    {
+        return CurrentState is DeadState || CurrentState is FleeingState ||
+               CurrentState is EnemyFightingState || CurrentState is FriendFightingState;
     }
 }

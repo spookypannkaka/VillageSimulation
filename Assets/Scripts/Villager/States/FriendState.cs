@@ -19,7 +19,14 @@ public class FriendState : IVillagerState
         {
             new Sequence(new List<BTNode>
             {
+                new CheckIfUnderAttack(),
+                new FightOrFleeAction()
+            }),
 
+            new Sequence(new List<BTNode>
+            {
+                new CheckCombat(),
+                new FightOrFleeAction(),
             }),
             new WanderAction() // Default action to wander
         });
@@ -28,6 +35,9 @@ public class FriendState : IVillagerState
     public void EnterState(VillagerController villager)
     {
         Debug.Log("Entering Friend State");
+        if (rootNode == null) {
+            InitializeBehaviorTree();
+        }
     }
 
     public void UpdateState(VillagerController villager)

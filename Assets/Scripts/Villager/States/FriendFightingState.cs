@@ -2,12 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class DeadState : IVillagerState
+public class FriendFightingState : IVillagerState
 {
     private Selector rootNode;
     private VillagerController villager;
 
-    public DeadState(VillagerController villager)
+    public FriendFightingState(VillagerController villager)
     {
         this.villager = villager;
         InitializeBehaviorTree();
@@ -21,12 +21,13 @@ public class DeadState : IVillagerState
             {
 
             }),
+            new WanderAction() // Default action to wander
         });
     }
 
     public void EnterState(VillagerController villager)
     {
-        Debug.Log("Entering Dead State");
+        Debug.Log("Entering Fighting State");
         if (villager.GetComponent<VillagerWander>().enabled) {
             villager.GetComponent<VillagerWander>().enabled = false;
         }

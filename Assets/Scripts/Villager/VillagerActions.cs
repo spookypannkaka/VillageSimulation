@@ -23,7 +23,7 @@ public class FightBackAction : BTNode
 {
     public override bool Execute(VillagerController villager)
     {
-        villager.TransitionToState(villager.FightingState);
+        villager.TransitionToState(villager.EnemyFightingState);
         return true;
     }
 }
@@ -37,12 +37,35 @@ public class TransitionToAlertedAction : BTNode
     }
 }
 
+public class SecondStealTransition : BTNode
+{
+    public override bool Execute(VillagerController villager)
+    {
+        if (villager.personality.Bravery >= 0.75f) {
+            villager.TransitionToState(villager.EnemyFightingState);
+        } else {
+            // Notify other villagers of a thief?
+        }
+        
+        return true;
+    }
+}
+
 // Node for transitioning to the Friend state (after receiving a gift)
 public class TransitionToFriendAction : BTNode
 {
     public override bool Execute(VillagerController villager)
     {
         villager.TransitionToState(villager.FriendState);
+        return true;
+    }
+}
+
+public class TransitionToNeutralAction : BTNode
+{
+    public override bool Execute(VillagerController villager)
+    {
+        villager.TransitionToState(villager.NeutralState);
         return true;
     }
 }
@@ -89,13 +112,14 @@ public class FightOrFleeAction : BTNode
 {
     public override bool Execute(VillagerController villager)
     {
-        if (villager.personality.Bravery > 0.5f)
-        {
-            villager.TransitionToState(villager.FightingState);
-        }
-        else
-        {
-            villager.TransitionToState(villager.FleeingState);
+        if (villager.CurrentState is FriendState) {
+                villager.TransitionToState(villager.FriendFightingState);
+        } else {
+            if (villager.personality.Bravery <= 0.75f) {
+                villager.TransitionToState(villager.FleeingState);
+            } else {
+                villager.TransitionToState(villager.EnemyFightingState);
+            }
         }
         return true;
     }

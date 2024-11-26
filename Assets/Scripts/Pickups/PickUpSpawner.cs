@@ -13,11 +13,11 @@ public class PickUpSpawner : MonoBehaviour
             Instantiate(healthGlobe, transform.position, Quaternion.identity); 
         } 
 
-        if (randomNum == 2) {
+        /*if (randomNum == 2) {
             Instantiate(staminaGlobe, transform.position, Quaternion.identity); 
-        }
+        }*/
 
-        if (randomNum == 3) {
+        if (randomNum == 2 || randomNum == 3) {
             int randomAmountOfGold = Random.Range(1, 4);
             
             for (int i = 0; i < randomAmountOfGold; i++)

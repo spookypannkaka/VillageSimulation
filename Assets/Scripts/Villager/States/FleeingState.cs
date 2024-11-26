@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using Pathfinding;
 using UnityEngine;
 
 public class FleeingState : IVillagerState
@@ -24,6 +25,12 @@ public class FleeingState : IVillagerState
     public void EnterState(VillagerController villager)
     {
         Debug.Log("Entering Fleeing State");
+
+        villager.GetComponent<AIPath>().enabled = true;
+
+        if (villager.GetComponent<VillagerWander>().enabled) {
+            villager.GetComponent<VillagerWander>().enabled = false;
+        }
     }
 
     public void UpdateState(VillagerController villager)

@@ -16,6 +16,14 @@ public class CheckIfPlayerIsGivingGift : BTNode
     }
 }
 
+public class CheckCombat : BTNode
+{
+    public override bool Execute(VillagerController villager)
+    {
+        return villager.IsNearCombatVillager;
+    }
+}
+
 /*public class CheckNearbyAttack : BTNode
 {
     public override bool Execute(VillagerController villager)
@@ -38,7 +46,7 @@ public class CheckIfUnderAttack : BTNode
     {
         if (villager.IsUnderAttack)
         {
-            // Respond to attack, e.g., transition to FightingState or FleeingState
+            /*// Respond to attack, e.g., transition to FightingState or FleeingState
             if (villager.personality.Bravery > 0.5f)
             {
                 villager.TransitionToState(villager.FightingState);
@@ -46,7 +54,7 @@ public class CheckIfUnderAttack : BTNode
             else
             {
                 villager.TransitionToState(villager.FleeingState);
-            }
+            }*/
             return true;
         }
         return false;

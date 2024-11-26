@@ -14,6 +14,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
 
     public void PurchaseCake()
     {
+        Debug.Log("trying to buy cake");
         if (!HasCake)
         {
             HasCake = true;
@@ -34,6 +35,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
             HasCake = true;
             UpdateInventoryUI();
             Debug.Log("Cake added to inventory!");
+            VillagerManager.Instance.NotifyVillagersPlayerIsStealing();
             // broadcast stealing in fov area
         }
         else
@@ -58,6 +60,7 @@ public class PlayerInventory : Singleton<PlayerInventory>
         {
             HasCake = false;
             UpdateInventoryUI();
+            PlayerHealth.Instance.HealPlayer();
             Debug.Log("You ate the cake!");
         }
     }

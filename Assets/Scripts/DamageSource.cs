@@ -18,7 +18,15 @@ public class DamageSource : MonoBehaviour
             if (villagerController != null)
             {
                 villagerController.NotifyOfAttack();
-                villagerController.OnPlayerAttacks();
+                //villagerController.OnPlayerAttacks();
+
+                if (other.tag == "Player") {
+                    // The player attacked this villager
+                    villagerController.OnPlayerAttacks();
+                } else if (other.tag == "Villager") {
+                    // Another villager attacked this villager, decide if to defend or not
+                    villagerController.OnNearbyVillagerAttacked(transform.position);
+                }
             }
         }
     }

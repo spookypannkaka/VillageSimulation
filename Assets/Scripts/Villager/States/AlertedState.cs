@@ -20,8 +20,29 @@ public class AlertedState : IVillagerState
             new Sequence(new List<BTNode>
             {
                 new CheckIfUnderAttack(),
-                new FightOrFleeAction() // Either fight or flee based on bravery
+                new FightOrFleeAction()
             }),
+
+            // Player steals an item
+            new Sequence(new List<BTNode>
+            {
+                new CheckIfPlayerIsStealing(),
+                new SecondStealTransition()
+            }),
+
+            new Sequence(new List<BTNode>
+            {
+                new CheckIfPlayerIsGivingGift(),
+                new ReceiveGiftAction(),
+                new TransitionToNeutralAction()
+            }),
+
+            new Sequence(new List<BTNode>
+            {
+                new CheckCombat(),
+                new FightOrFleeAction(),
+            }),
+
             new WanderAction() // Fallback to wandering if no threat detected
         });
     }

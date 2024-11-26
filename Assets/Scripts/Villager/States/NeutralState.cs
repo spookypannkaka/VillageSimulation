@@ -38,6 +38,14 @@ public class NeutralState : IVillagerState
                 new ReceiveGiftAction(),
                 new TransitionToFriendAction() // Transition to FriendState after receiving a gift
             }),
+
+            // Check for dead villagers
+            new Sequence(new List<BTNode>
+            {
+                new CheckCombat(),
+                new FightOrFleeAction(),
+            }),
+
             new WanderAction() // Default action to wander
         });
     }
@@ -55,6 +63,6 @@ public class NeutralState : IVillagerState
 
     public void ExitState(VillagerController villager)
     {
-        villager.GetComponent<VillagerWander>().enabled = false;
+        //villager.GetComponent<VillagerWander>().enabled = false;
     }
 }

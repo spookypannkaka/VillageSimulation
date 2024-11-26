@@ -39,7 +39,7 @@ public class VillagerWander : MonoBehaviour
     {
         aiPath.destination = transform.position; // Set destination to current position
         aiPath.maxSpeed = 0f;                    // Stop movement
-        aiPath.enabled = false;                  // Optionally, disable AIPath to stop recalculations
+        //aiPath.enabled = false;                  // Optionally, disable AIPath to stop recalculations
         isWalking = false;
         enabled = false;                         // Disable this fleeing script
     }

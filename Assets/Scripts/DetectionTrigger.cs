@@ -1,3 +1,4 @@
+using Unity.VisualScripting;
 using UnityEngine;
 
 /* 
@@ -37,6 +38,25 @@ public class DetectionTrigger : MonoBehaviour
                     break;
             }
         }
+
+        if (other.CompareTag("Villager")) {
+            VillagerController otherVillager = other.GetComponent<VillagerController>();
+
+            switch (detectionType) {
+                case DetectionType.FOV:
+                    if (otherVillager != null && otherVillager.IsInCombatOrDead()) {
+                        controller.SetIsNearCombatVillager(true);
+                    }
+                    break;
+                case DetectionType.DetectionRadius:
+                    if (otherVillager != null && otherVillager.IsInCombatOrDead()) {
+                        controller.SetIsNearCombatVillager(true);
+                    }
+                    break;
+                case DetectionType.VillagerArea:
+                    break;
+            }
+        }
     }
 
     private void OnTriggerExit2D(Collider2D other)
@@ -54,6 +74,25 @@ public class DetectionTrigger : MonoBehaviour
                 case DetectionType.VillagerArea:
                     controller.SetPlayerInVillagerArea(false);
                     VillagerManager.Instance.ExitVillagerArea(controller);
+                    break;
+            }
+        }
+
+        if (other.CompareTag("Villager")) {
+            VillagerController otherVillager = other.GetComponent<VillagerController>();
+
+            switch (detectionType) {
+                case DetectionType.FOV:
+                    if (otherVillager != null && otherVillager.IsInCombatOrDead()) {
+                        controller.SetIsNearCombatVillager(false);
+                    }
+                    break;
+                case DetectionType.DetectionRadius:
+                    if (otherVillager != null && otherVillager.IsInCombatOrDead()) {
+                        controller.SetIsNearCombatVillager(false);
+                    }
+                    break;
+                case DetectionType.VillagerArea:
                     break;
             }
         }

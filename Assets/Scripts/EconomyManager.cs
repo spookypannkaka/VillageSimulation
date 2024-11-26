@@ -7,7 +7,7 @@ public class EconomyManager : Singleton<EconomyManager>
 {
     private TMP_Text coinText;
     private int currentCoins = 0;
-    public int cakePrice = 10;
+    public int cakePrice = 3;
 
     public bool CanAffordCake()
     {
